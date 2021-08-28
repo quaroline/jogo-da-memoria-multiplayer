@@ -1,3 +1,8 @@
-<div class="bg-light border rounded card">
-    <img src="{{ urlImagem }}">
+<div class="bg-light border rounded card m-3" (click)="quadroClicado.emit()" [@cardFlip]="pecinha.state">
+    <div class="back">
+        <img src="assets/background.png">
+    </div>
+    <div class="front">
+        <img src="{{ pecinha.id }}">
+    </div>
 </div>
