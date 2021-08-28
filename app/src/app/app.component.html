@@ -1,0 +1,8 @@
+<div class="row justify-content-md-center">
+    <app-quadrinho
+        class="col-md-auto"
+        *ngFor="let pecinha of pecinhas; let i = index" 
+        [pecinha]="pecinha" 
+        (quadroClicado)="selecionarPecinha(i)"
+    ></app-quadrinho>
+</div>
