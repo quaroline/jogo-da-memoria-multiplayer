@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { TipoPecinha } from './models/tipo-pecinha';
 
 @Component({
@@ -15,15 +15,13 @@ export class AppComponent {
 
   imagens: string[] = [
     'https://i.imgur.com/iX7600V.jpeg',
-    'https://i.imgur.com/iX7600V.jpeg',
-    'https://i.imgur.com/iX7600V.jpeg',
-    'https://i.imgur.com/iX7600V.jpeg'
+    'https://i.imgur.com/hgxd45J.jpeg'
   ];
 
   pecinhasCombinadas = 0;
 
   constructor(
-    private toastr: ToastrService) {
+    private snackBar: MatSnackBar) {
     this.configurarPecinhas();
   }
 
@@ -83,15 +81,15 @@ export class AppComponent {
 
         if (this.pecinhasCombinadas === this.imagens.length)
         {
-          // const dialogRef = this.dialog.open(RestartDialogComponent, {
-          //   disableClose: true
-          // });
+          this.snackBar.open('Partida finalizada! :D', 'Fechar', {
+            horizontalPosition: 'start',
+            verticalPosition: 'bottom',
+            duration: 2000
+          }).afterDismissed().subscribe(() => {
+            this.pecinhasCombinadas = 0;
 
-          // dialogRef.afterClosed().subscribe(() => {
-          //   this.pecinhasCombinadas = 0;
-
-          //   this.configurarPecinhas();
-          // });
+            this.configurarPecinhas();
+          });
         }
       }
     }, 1000);
