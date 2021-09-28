@@ -5,6 +5,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { AppComponent } from './app.component';
 import { QuadrinhoComponent } from './quadrinho/quadrinho.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { QuadrinhoComponent } from './quadrinho/quadrinho.component';
     BrowserModule,
     BrowserAnimationsModule,
     MatSnackBarModule,
-    TooltipModule.forRoot()
+    TooltipModule.forRoot(),
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AppService } from './app.service';
 import { TipoPecinha } from './models/tipo-pecinha';
 
 @Component({
@@ -8,7 +9,7 @@ import { TipoPecinha } from './models/tipo-pecinha';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'app';
+  title = 'Matcha © Memory Game';
 
   pecinhas: TipoPecinha[] = [];
   pecinhasViradas: TipoPecinha[] = [];
@@ -21,8 +22,17 @@ export class AppComponent {
   pecinhasCombinadas = 0;
 
   constructor(
-    private snackBar: MatSnackBar) {
-    this.configurarPecinhas();
+    private snackBar: MatSnackBar,
+    private service: AppService) {
+      this.novoJogo();
+
+      this.configurarPecinhas();
+  }
+
+  novoJogo(): void {
+    this.service.iniciarNovoJogo().subscribe(() => {
+      console.log('Novo jogo iniciado.')
+    });
   }
 
   configurarPecinhas(): void {
@@ -30,13 +40,13 @@ export class AppComponent {
 
     // adicionando cada pecinha à lista
     this.imagens.forEach((imagem) => {
-      const pecinhha: TipoPecinha = {
+      const pecinha: TipoPecinha = {
         id: imagem,
         state: 'default'
       };
 
-      this.pecinhas.push({ ...pecinhha });
-      this.pecinhas.push({ ...pecinhha });
+      this.pecinhas.push({ ...pecinha });
+      this.pecinhas.push({ ...pecinha });
 
     });
 
