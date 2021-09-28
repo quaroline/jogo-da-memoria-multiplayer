@@ -30,9 +30,7 @@ export class AppComponent {
   }
 
   novoJogo(): void {
-    this.service.iniciarNovoJogo().subscribe(() => {
-      console.log('Novo jogo iniciado.')
-    });
+    this.service.iniciarNovoJogo();
   }
 
   configurarPecinhas(): void {

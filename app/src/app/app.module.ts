@@ -6,6 +6,7 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { AppComponent } from './app.component';
 import { QuadrinhoComponent } from './quadrinho/quadrinho.component';
 import { HttpClientModule } from '@angular/common/http';
+import { SocketIoModule } from 'ngx-socket-io';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,11 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     MatSnackBarModule,
     TooltipModule.forRoot(),
-    HttpClientModule
+    HttpClientModule,
+    SocketIoModule.forRoot({
+      url: 'http://localhost:3000',
+      options: {}
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
