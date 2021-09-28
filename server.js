@@ -1,24 +1,29 @@
-const { SSL_OP_NO_TICKET } = require('constants')
 const express = require('express')
-const path = require('path')
-
+const cors = require('cors')
+const { v4: uuidv4 } = require('uuid')
 const app = express()
 const server = require('http').createServer(app)
 const io = require('socket.io')(server)
 
-app.use(express.static(path.join(__dirname, 'app/src')))
-app.set('views', path.join(__dirname, 'app/src'))
+app.use(cors({
+    credentials: true, 
+    origin: true}
+));
 
-app.engine('html', require('ejs').renderFile)
-app.set('view engine', 'html')
+app.use(express.json());
+app.use(express.urlencoded({
+    extended: true
+}))
 
-app.use('/', (req, res) => {
-    res.render('index.html')
+app.get('/api/novo-jogo', (_, res) => {
+    res.json(uuidv4());
 })
 
-let mensagens = []
+app.get('/', (_, res) => {
+    res.send('Rota inicial funcionando.');
+})
 
-io.on('connection', socket => {
+io.on('connection', (socket) => {
     console.log('Socket conectado ' + socket.id)
 
     socket.emit('previousMessages', mensagens)
