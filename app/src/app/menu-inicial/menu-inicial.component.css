@@ -1,0 +1,15 @@
+div {
+    text-transform: uppercase;
+}
+
+h6 {
+    font-weight: 900;
+}
+
+#nomeDeUsuario {
+    text-align: center;
+}
+
+.bold {
+    font-weight: 900;
+}

@@ -1,0 +1,54 @@
+<div class="row">
+    <div class="col-md-12 p-2">
+        <div class="row p-2">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <h3 class="bold p-0 m-0">Bem Vindo</h3>
+                <br>
+                <input 
+                    id="nomeDeUsuario"
+                    type="text" 
+                    readonly 
+                    class="border rounded border-secondary border-2 p-2" 
+                    [value]="nomeDeUsuario"/>
+                <br><br>
+                <hr>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+    </div>
+    <div class="col-md-6 p-2">
+        <div class="form-group">
+            <div class="row p-2">
+                <label for="" class="col-sm-4 col-form-label">Dificuldade</label>
+                <div class="col-sm-4">
+                    <select class="form-control-plaintext border rounded border-secondary border-2 p-2">
+                        <option *ngFor="let dificuldade of dificuldades" value="">
+                            {{ dificuldade + 'x' + dificuldade }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <button class="btn btn-success mt-4 col-sm-6">Iniciar Novo Jogo</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 p-2">
+        <div class="form-group">
+            <div class="row p-2">
+                <label for="" class="col-sm-4 col-form-label">Código</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control-plaintext border rounded border-secondary border-2 p-2">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <button class="btn btn-warning mt-4 col-sm-6">Entrar Em Partida</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

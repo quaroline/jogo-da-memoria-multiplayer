@@ -7,11 +7,13 @@ import { AppComponent } from './app.component';
 import { QuadrinhoComponent } from './quadrinho/quadrinho.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SocketIoModule } from 'ngx-socket-io';
+import { MenuInicialComponent } from './menu-inicial/menu-inicial.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    QuadrinhoComponent
+    QuadrinhoComponent,
+    MenuInicialComponent
   ],
   imports: [
     BrowserModule,
