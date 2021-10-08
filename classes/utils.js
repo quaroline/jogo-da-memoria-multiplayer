@@ -1,7 +1,12 @@
 'use strict';
-
 module.exports = class Utils {
-    constructor() {}
+    iteratorHasNext = (iterator) => {
+        const r = iterator.next();
+
+        iterator.current = r.value;
+
+        return !r.done;
+    }
 
     enviarInformacoesParaCliente = (socket, uri, data) => {
         socket.emit(uri, data)
