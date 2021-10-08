@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { AppService } from './app.service';
 import { TipoPecinha } from './models/tipo-pecinha';
 
 @Component({
@@ -9,7 +8,7 @@ import { TipoPecinha } from './models/tipo-pecinha';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'Matcha © Memory Game';
+  title = 'Matcha © Card Game';
 
   pecinhas: TipoPecinha[] = [];
   pecinhasViradas: TipoPecinha[] = [];
@@ -20,17 +19,11 @@ export class AppComponent {
   ];
 
   pecinhasCombinadas = 0;
+  partidaId: string = '';
 
   constructor(
-    private snackBar: MatSnackBar,
-    private service: AppService) {
-      this.novoJogo();
-
+    private snackBar: MatSnackBar) {
       this.configurarPecinhas();
-  }
-
-  novoJogo(): void {
-    this.service.iniciarNovoJogo();
   }
 
   configurarPecinhas(): void {
