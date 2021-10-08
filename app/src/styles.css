@@ -14,3 +14,11 @@ body {
     margin: 0; 
     font-family: 'Nunito', "Helvetica Neue", sans-serif; 
 }
+
+.vertical-center {
+    margin: 0;
+    position: absolute;
+    top: 49%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
