@@ -37,15 +37,15 @@ io.on('connection', (socket) => {
         partida.iniciarNovaPartida(socket)
     });
 
-    socket.on("entrar-em-partida-existente", (partidaId, callbackAndSnackbar) => {
+    socket.on("entrar-em-partida-existente", (partidaId, callback) => {
         if (io.sockets.adapter.rooms.has(partidaId))
             if (partida.partidaPermiteNovoJogador(socket, partidaId))
                 partida.entrarEmPartida(socket, partidaId)
             else {
-                utils.executarRetorno(callbackAndSnackbar, 'Esta partida já contém dois membros.', 500)
+                utils.executarRetorno(callback, 'Esta partida já contém dois membros.', 500)
             }
         else {
-            utils.executarRetorno(callbackAndSnackbar, 'Código Inválido', 500)
+            utils.executarRetorno(callback, 'Código Inválido', 500)
         }
     })
 })
