@@ -8,6 +8,11 @@ module.exports = class Utils {
         return !r.done;
     }
 
+    executarRetorno = (callback, mensagem, codigoRetorno) => {
+        if (typeof(callback) === 'function') 
+            callback(mensagem.trim(), codigoRetorno)
+    }
+
     enviarInformacoesParaCliente = (socket, uri, data) => {
         socket.emit(uri, data)
     }
