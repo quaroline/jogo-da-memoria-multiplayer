@@ -55,14 +55,12 @@ export class MenuInicialComponent implements OnInit {
   public entrarEmPartidaExistente() {
     this.service.entrarEmPartidaExistente(this.partidaExistenteId).subscribe((partida) => {
       this.partida = partida;
-      console.log(partida)
     })
   }
 
   public iniciarNovoJogo(): void {
     this.service.iniciarNovoJogo().subscribe((partida) => {
       this.partida = partida;
-      console.log(partida)
     })
   }
 }

@@ -27,7 +27,6 @@ const inicializarJogador = (socket) => {
     jogadores.push(jogador)
 
     utils.enviarInformacoesParaCliente(socket, 'pegarJogador', jogador)
-    console.log(jogador.nomeDeUsuario)
 }
 
 io.on('connection', (socket) => {
