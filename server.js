@@ -1,10 +1,11 @@
 'use strict';
 
 const express = require('express')
-const Jogador = require('./classes/jogador')
-const Utils = require('./classes/utils')
 
-const jogador = new Jogador()
+const Utils = require('./classes/utils')
+const Partida = require('./classes/partida')
+
+const partida = new Partida()
 const utils = new Utils()
 
 const app = express()
@@ -15,18 +16,7 @@ const io = require('socket.io')(server, {
     }
 })
 
-const { v4: uuidv4 } = require('uuid')
-
 const jogadores = []
-
-const entrarEmPartida = (socket, partidaId) => {
-    socket.join(partidaId)
-
-    utils.enviarInformacoesParaCliente(socket, 'pegarInformacoesDaPartida', { 
-        partidaId, 
-        jogadorId: socket.id 
-    })
-}
 
 const inicializarJogador = (socket) => {
     let jogador = { 
@@ -37,6 +27,7 @@ const inicializarJogador = (socket) => {
     jogadores.push(jogador)
 
     utils.enviarInformacoesParaCliente(socket, 'pegarJogador', jogador)
+    console.log(jogador.nomeDeUsuario)
 }
 
 io.on('connection', (socket) => {
@@ -44,11 +35,19 @@ io.on('connection', (socket) => {
 
     // Rotas
     socket.on("novo-jogo", () => {
-        entrarEmPartida(socket, `partida_${uuidv4()}`)
+        partida.iniciarNovaPartida(socket)
     });
 
-    socket.on("entrar-em-partida-existente", (partidaId) => {
-        entrarEmPartida(socket, `partida_${partidaId}`)
+    socket.on("entrar-em-partida-existente", (partidaId, callbackAndSnackbar) => {
+        if (io.sockets.adapter.rooms.has(partidaId))
+            if (partida.partidaPermiteNovoJogador(socket, partidaId))
+                partida.entrarEmPartida(socket, partidaId)
+            else {
+                utils.executarRetorno(callbackAndSnackbar, 'Esta partida já contém dois membros.', 500)
+            }
+        else {
+            utils.executarRetorno(callbackAndSnackbar, 'Código Inválido', 500)
+        }
     })
 })
 
