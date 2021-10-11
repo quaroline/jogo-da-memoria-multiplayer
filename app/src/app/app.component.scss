@@ -1,3 +1,15 @@
 body {
     text-transform: capitalize;
 }
+
+.snackbar {
+    color: white;
+}
+
+.snackbar-sucesso {
+    background-color: #2e7d32;
+}
+
+.snackbar-erro {
+    background-color: #c62828;
+}
