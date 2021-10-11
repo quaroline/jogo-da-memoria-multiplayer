@@ -7,10 +7,9 @@
                 <h3 class="bold p-0 m-0">Bem Vindo</h3>
                 <br>
                 <input 
-                    id="nomeDeUsuario"
                     type="text" 
                     readonly 
-                    class="border rounded border-secondary border-2 p-2" 
+                    class="border rounded border-secondary border-2 p-2 center-text" 
                     [value]="jogador.nomeDeUsuario"/>
                 <br><br>
                 <hr>
@@ -18,7 +17,21 @@
             <div class="col-md-4"></div>
         </div>
     </div>
-    <div class="col-md-6 p-2">
+    <div class="col-md-12 p-2" *ngIf="partida && novaPartida" [@enterAnimation]>
+        <div class="row p-2 mt-2">
+            <div class="col-md-12">
+                <h4 class="bold p-0 m-0">Código Da Sua Partida</h4>
+                <br>
+                <input 
+                    type="text" 
+                    readonly 
+                    class="border rounded border-secondary border-2 p-2 center-text" 
+                    [value]="partida.id"/>
+                <br><br>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 p-2" *ngIf="!partida || !novaPartida">
         <div class="form-group">
             <div class="row p-2">
                 <label for="" class="col-sm-4 col-form-label">Dificuldade</label>
@@ -42,7 +55,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-6 p-2">
+    <div class="col-md-6 p-2" *ngIf="!partida || !novaPartida">
         <div class="form-group">
             <div class="row p-2">
                 <label for="" class="col-sm-4 col-form-label">Código</label>

@@ -1,3 +1,4 @@
+import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { AppService } from '../app.service';
 import { Jogador } from '../models/jogador';
@@ -7,7 +8,21 @@ import { Utils } from '../utils/utils';
 @Component({
   selector: 'app-menu-inicial',
   templateUrl: './menu-inicial.component.html',
-  styleUrls: ['./menu-inicial.component.css']
+  styleUrls: ['./menu-inicial.component.css'],
+  animations: [
+    trigger(
+      'enterAnimation', [
+        transition(':enter', [
+          style({transform: 'translateX(100%)', opacity: 0}),
+          animate('500ms', style({transform: 'translateX(0)', opacity: 1}))
+        ]),
+        transition(':leave', [
+          style({transform: 'translateX(0)', opacity: 1}),
+          animate('500ms', style({transform: 'translateX(100%)', opacity: 0}))
+        ])
+      ]
+    )
+  ],
 })
 export class MenuInicialComponent implements OnInit {
 
@@ -22,6 +37,7 @@ export class MenuInicialComponent implements OnInit {
   dificuldadeSelecionada: string = '2';
 
   guidValido: boolean = false;
+  novaPartida: boolean = false;
   
   dificuldades: number[] = [2, 4, 6];
 
@@ -61,6 +77,8 @@ export class MenuInicialComponent implements OnInit {
   public iniciarNovoJogo(): void {
     this.service.iniciarNovoJogo().subscribe((partida) => {
       this.partida = partida;
+
+      this.novaPartida = true;
     })
   }
 }

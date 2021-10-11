@@ -11,7 +11,7 @@ module.exports = class Partida {
 
     #enviarInformacoesDaPartidaParaCliente = (socket, partidaId) => {
         utils.enviarInformacoesParaCliente(socket, 'pegarPartida', { 
-            partidaId, 
+            id: partidaId, 
             jogadorId: socket.id 
         })
     }
