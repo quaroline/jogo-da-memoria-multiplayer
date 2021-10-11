@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-md-12 p-2">
         <img src="assets/logo.png" alt="Matcha" class="mb-4">
-        <div class="row p-2 mt-2">
+        <div class="row p-2 mt-2" *ngIf="jogador">
             <div class="col-md-4"></div>
             <div class="col-md-4">
                 <h3 class="bold p-0 m-0">Bem Vindo</h3>
@@ -11,7 +11,7 @@
                     type="text" 
                     readonly 
                     class="border rounded border-secondary border-2 p-2" 
-                    [value]="nomeDeUsuario"/>
+                    [value]="jogador.nomeDeUsuario"/>
                 <br><br>
                 <hr>
             </div>
@@ -23,8 +23,10 @@
             <div class="row p-2">
                 <label for="" class="col-sm-4 col-form-label">Dificuldade</label>
                 <div class="col-sm-4">
-                    <select class="form-control-plaintext border rounded border-secondary border-2 p-2">
-                        <option *ngFor="let dificuldade of dificuldades" value="">
+                    <select 
+                        (change)="onSelect($event)"
+                        class="form-control-plaintext border rounded border-secondary border-2 p-2">
+                        <option *ngFor="let dificuldade of dificuldades" [value]="dificuldade">
                             {{ dificuldade + 'x' + dificuldade }}
                         </option>
                     </select>
@@ -32,7 +34,10 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <button class="btn btn-success mt-4 col-sm-6">Iniciar Novo Jogo</button>
+                    <button 
+                        [disabled]="!dificuldadeSelecionada"
+                        class="btn btn-success mt-4 col-sm-6" 
+                        (click)="iniciarNovoJogo()">Iniciar Novo Jogo</button>
                 </div>
             </div>
         </div>
@@ -42,12 +47,19 @@
             <div class="row p-2">
                 <label for="" class="col-sm-4 col-form-label">Código</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control-plaintext border rounded border-secondary border-2 p-2">
+                    <input 
+                        type="text"
+                        name="partidaExistenteId" 
+                        (focusout)="onFocusOut($event)"
+                        class="form-control-plaintext border rounded border-secondary border-2 p-2">
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <button class="btn btn-warning mt-4 col-sm-6">Entrar Em Partida</button>
+                    <button 
+                        [disabled]="!guidValido"
+                        class="btn btn-warning mt-4 col-sm-6" 
+                        (click)="entrarEmPartidaExistente()">Entrar Em Partida</button>
                 </div>
             </div>
         </div>

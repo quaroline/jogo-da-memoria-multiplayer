@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Socket } from 'ngx-socket-io';
 import { Observable } from 'rxjs';
+import { AppInjector } from './app.module';
 import { Jogador } from './models/jogador';
 import { Partida } from './models/partida';
 
@@ -32,7 +34,7 @@ export class AppService {
   }
 
   entrarEmPartidaExistente(partidaId: string): Observable<Partida> {
-    this.socket.emit('entrar-em-partida-existente', partidaId);
+    this.socket.emit('entrar-em-partida-existente', partidaId, this.callback);
 
     this.socket.on('pegarPartida', (partida: Partida) => {
       this.observer.next(partida);
@@ -44,6 +46,17 @@ export class AppService {
   private getObservable(): Observable<any> {
     return new Observable(observer => {
       this.observer = observer;
+    });
+  }
+
+  private callback(mensagem: string, codigoRetorno: number) {
+    const snackbar = AppInjector.get(MatSnackBar);
+
+    snackbar.open(mensagem, 'Fechar', {
+      horizontalPosition: 'start',
+      verticalPosition: 'bottom',
+      duration: 2000,
+      panelClass: ['snackbar', 'snackbar-' + (codigoRetorno == 200 ? 'sucesso' : 'erro')]
     });
   }
 }

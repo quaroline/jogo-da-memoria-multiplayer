@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Injector, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -8,6 +8,9 @@ import { QuadrinhoComponent } from './quadrinho/quadrinho.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SocketIoModule } from 'ngx-socket-io';
 import { MenuInicialComponent } from './menu-inicial/menu-inicial.component';
+import { AppService } from './app.service';
+
+export let AppInjector: Injector;
 
 @NgModule({
   declarations: [
@@ -26,7 +29,11 @@ import { MenuInicialComponent } from './menu-inicial/menu-inicial.component';
       options: {}
     })
   ],
-  providers: [],
+  providers: [AppService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(private injector: Injector) {
+    AppInjector = this.injector;
+  }
+}
