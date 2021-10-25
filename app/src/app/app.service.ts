@@ -55,7 +55,7 @@ export class AppService {
     snackbar.open(mensagem, 'Fechar', {
       horizontalPosition: 'start',
       verticalPosition: 'bottom',
-      duration: 2000,
+      duration: 5000,
       panelClass: ['snackbar', 'snackbar-' + (codigoRetorno == 200 ? 'sucesso' : 'erro')]
     });
   }

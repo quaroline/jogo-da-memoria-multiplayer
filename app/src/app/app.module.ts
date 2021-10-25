@@ -9,6 +9,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { SocketIoModule } from 'ngx-socket-io';
 import { MenuInicialComponent } from './menu-inicial/menu-inicial.component';
 import { AppService } from './app.service';
+import { ModoAdministradorComponent } from './modo-administrador/modo-administrador.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 export let AppInjector: Injector;
 
@@ -16,7 +18,8 @@ export let AppInjector: Injector;
   declarations: [
     AppComponent,
     QuadrinhoComponent,
-    MenuInicialComponent
+    MenuInicialComponent,
+    ModoAdministradorComponent
   ],
   imports: [
     BrowserModule,
@@ -24,6 +27,7 @@ export let AppInjector: Injector;
     MatSnackBarModule,
     TooltipModule.forRoot(),
     HttpClientModule,
+    ReactiveFormsModule,
     SocketIoModule.forRoot({
       url: 'http://localhost:3000',
       options: {}
