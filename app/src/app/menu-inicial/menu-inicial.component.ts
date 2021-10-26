@@ -1,5 +1,5 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AppService } from '../app.service';
 import { Jogador } from '../models/jogador';
 import { Partida } from '../models/partida';
@@ -29,6 +29,8 @@ export class MenuInicialComponent implements OnInit {
   constructor(private service: AppService) {
     this.pegarJogador();
   }
+
+  @Output() dificuldade = new EventEmitter();
 
   jogador: Jogador;
   partida: Partida;
@@ -79,6 +81,8 @@ export class MenuInicialComponent implements OnInit {
       this.partida = partida;
 
       this.novaPartida = true;
+
+      this.dificuldade.emit(this.dificuldadeSelecionada);
     })
   }
 }

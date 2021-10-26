@@ -1,11 +1,21 @@
 <div class="autenticacao">
-    <div [formGroup]="credenciais">
-        <div class="form-group pb-2">
-            <input type="text" class="form-control" placeholder="Usuário" formControlName="usuario">
+    <div *ngIf="!logado; else telaAdministrativa">
+        <div [formGroup]="credenciais">
+            <div class="form-group pb-2">
+                <input type="text" class="form-control" placeholder="Usuário" formControlName="usuario">
+            </div>
+            <div class="form-group pb-4">
+                <input type="password" class="form-control" placeholder="Senha" formControlName="senha">
+            </div>
+            <button class="btn btn-primary" (click)="tentarEfetuarLogin()">Entrar</button>
         </div>
-        <div class="form-group pb-4">
-            <input type="password" class="form-control" placeholder="Senha" formControlName="senha">
-        </div>
-        <button class="btn btn-primary" (click)="tentarEfetuarLogin()">Entrar</button>
     </div>
+    <ng-template #telaAdministrativa>
+        <div class="form-group">
+            <input type="file" id="file" name="file" class="form-control mb-4" (change)="escolherImagens($event)">
+            <button class="btn btn-primary mb-4" (click)="efetuarUpload()">Subir</button>
+            <br>
+            <img id="imagem" src="#" class="img-fluid img-thumbnail" width="50%">
+        </div>
+    </ng-template>
 </div>

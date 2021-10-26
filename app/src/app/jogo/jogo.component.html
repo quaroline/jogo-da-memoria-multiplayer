@@ -1,0 +1,7 @@
+<div class="card-columns">
+    <app-quadrinho
+        *ngFor="let pecinha of pecinhas; let i = index" 
+        [pecinha]="pecinha" 
+        (quadroClicado)="selecionarPecinha(i)"
+    ></app-quadrinho>
+</div>

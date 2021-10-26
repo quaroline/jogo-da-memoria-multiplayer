@@ -11,6 +11,7 @@ import { MenuInicialComponent } from './menu-inicial/menu-inicial.component';
 import { AppService } from './app.service';
 import { ModoAdministradorComponent } from './modo-administrador/modo-administrador.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { JogoComponent } from './jogo/jogo.component';
 
 export let AppInjector: Injector;
 
@@ -19,7 +20,8 @@ export let AppInjector: Injector;
     AppComponent,
     QuadrinhoComponent,
     MenuInicialComponent,
-    ModoAdministradorComponent
+    ModoAdministradorComponent,
+    JogoComponent
   ],
   imports: [
     BrowserModule,

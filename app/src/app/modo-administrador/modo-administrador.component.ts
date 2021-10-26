@@ -15,6 +15,12 @@ export class ModoAdministradorComponent implements OnInit {
     senha: new FormControl('')
   });
 
+  logado: boolean = false;
+
+  cacheNome: string = 'imagens';
+
+  arquivos: any[] = [];
+
   constructor() {}
 
   ngOnInit(): void {}
@@ -29,7 +35,9 @@ export class ModoAdministradorComponent implements OnInit {
     const snackbar = AppInjector.get(MatSnackBar);
 
     if (usuario === "admin" && senha === "admin") {
-      mensagem = 'Usuário autenticado com sucesso.'
+      mensagem = 'Usuário autenticado com sucesso.';
+
+      this.logado = true;
     }
 
     snackbar.open(mensagem, 'Fechar', {
@@ -39,4 +47,42 @@ export class ModoAdministradorComponent implements OnInit {
     });
   }
 
+  escolherImagens(event: any) {
+    this.arquivos = event.target.files;
+  }
+
+  efetuarUpload() {
+    if (this.arquivos && this.arquivos[0]) {
+      var img = document.querySelector('img');
+
+      if (img) {
+        img.onload = () => {
+          URL.revokeObjectURL(img?.src || '');
+        }
+
+        let src = URL.createObjectURL(this.arquivos[0]);
+
+        img.src = src;
+
+        this.gravarEmCache(src);
+      }
+    }
+  }
+
+  gravarEmCache(src: string) {
+    let cache = localStorage[this.cacheNome];
+
+    if (!src)
+      return;
+
+    if (cache) {
+      let cacheEmMemoria = JSON.parse(cache) as string[];
+
+      cacheEmMemoria.push(src);
+
+      localStorage[this.cacheNome] = JSON.stringify(cacheEmMemoria);
+    } else {
+      localStorage[this.cacheNome] = JSON.stringify([ src ]);
+    }
+  }
 }

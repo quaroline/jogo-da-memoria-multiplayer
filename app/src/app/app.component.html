@@ -1,8 +1,15 @@
-<div class="row justify-content-md-center">
-    <app-quadrinho
-        class="col-md-auto"
-        *ngFor="let pecinha of pecinhas; let i = index" 
-        [pecinha]="pecinha" 
-        (quadroClicado)="selecionarPecinha(i)"
-    ></app-quadrinho>
+<div class="row">
+    <div class="col-md-12">
+        <app-modo-administrador *ngIf="clickMenuAdministrativo; else layout"></app-modo-administrador>
+        <ng-template #layout>
+            <app-menu-inicial (dificuldade)="receberDificuldade($event)" *ngIf="!dificuldadeSelecionada"></app-menu-inicial>
+            <app-jogo [dificuldadeSelecionada]="dificuldadeSelecionada" *ngIf="iniciarJogo"></app-jogo>
+        </ng-template>
+    </div>
 </div>
+<button class="btn btn-link btn-administrativo" (click)="abrirMenuAdministrativo()" *ngIf="!clickMenuAdministrativo">
+    Menu Administrativo
+</button>
+<button class="btn btn-link btn-administrativo" (click)="fecharMenuAdministrativo()" *ngIf="clickMenuAdministrativo">
+    Voltar para Jogo
+</button>
