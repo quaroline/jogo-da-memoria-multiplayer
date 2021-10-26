@@ -1,5 +1,7 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { AppInjector } from '../app.module';
 import { AppService } from '../app.service';
 import { Jogador } from '../models/jogador';
 import { Partida } from '../models/partida';
@@ -73,14 +75,30 @@ export class MenuInicialComponent implements OnInit {
   public entrarEmPartidaExistente() {
     this.service.entrarEmPartidaExistente(this.partidaExistenteId).subscribe((partida) => {
       this.partida = partida;
+
+      this.dificuldadeSelecionada = this.dificuldadeSelecionada[
+        this.dificuldadeSelecionada.length - 1
+      ];
+
+      console.log(this.dificuldadeSelecionada)
+
+      this.dificuldade.emit(this.dificuldadeSelecionada);
     })
   }
 
   public iniciarNovoJogo(): void {
-    this.service.iniciarNovoJogo().subscribe((partida) => {
+    this.service.iniciarNovoJogo(parseInt(this.dificuldadeSelecionada)).subscribe((partida) => {
       this.partida = partida;
 
       this.novaPartida = true;
+
+      const snackbar = AppInjector.get(MatSnackBar);
+
+      snackbar.open(`Código da partida: ${this.partida.id}`, 'Fechar', {
+        horizontalPosition: 'start',
+        verticalPosition: 'bottom',
+        duration: 8000
+      });
 
       this.dificuldade.emit(this.dificuldadeSelecionada);
     })

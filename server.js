@@ -33,8 +33,8 @@ io.on('connection', (socket) => {
     inicializarJogador(socket)
 
     // Rotas
-    socket.on("novo-jogo", () => {
-        partida.iniciarNovaPartida(socket)
+    socket.on("novo-jogo", (dificuldade) => {
+        partida.iniciarNovaPartida(socket, dificuldade)
     });
 
     socket.on("entrar-em-partida-existente", (partidaId, callback) => {

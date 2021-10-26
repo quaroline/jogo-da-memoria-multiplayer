@@ -23,8 +23,8 @@ export class AppService {
     return this.getObservable();
   }
 
-  iniciarNovoJogo(): Observable<Partida> {
-    this.socket.emit('novo-jogo');
+  iniciarNovoJogo(dificuldade: number): Observable<Partida> {
+    this.socket.emit('novo-jogo', dificuldade);
 
     this.socket.on('pegarPartida', (partida: Partida) => {
       this.observer.next(partida);
