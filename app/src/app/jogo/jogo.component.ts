@@ -24,6 +24,8 @@ export class JogoComponent implements OnChanges {
     'https://i.imgur.com/9hz5itz.jpg'
   ];
 
+  imagensEscolhidas: string[] = [];
+
   pecinhasCombinadas = 0;
   partidaId: string = '';
 
@@ -45,17 +47,17 @@ export class JogoComponent implements OnChanges {
   }
 
   configurarPecinhas(): void {
-    let imagens = (this.imagens as any[])
+    this.imagensEscolhidas = (this.imagens as any[])
       .map(a => [Math.random(), a])
       .sort((a, b) => a[0] - b[0])
       .map(a => a[1]);
 
-    imagens.splice(this.dificuldadeSelecionada);
+    this.imagensEscolhidas.splice(this.dificuldadeSelecionada);
 
     this.pecinhas = [];
 
     // adicionando cada pecinha à lista
-    imagens.forEach((imagem) => {
+    this.imagensEscolhidas.forEach((imagem) => {
       const pecinha: TipoPecinha = {
         id: imagem,
         state: 'default'
@@ -104,7 +106,7 @@ export class JogoComponent implements OnChanges {
       if (proximoEstadoPecinha === 'matched') {
         this.pecinhasCombinadas++;
 
-        if (this.pecinhasCombinadas === this.imagens.length)
+        if (this.pecinhasCombinadas === this.imagensEscolhidas.length)
         {
           this.snackBar.open('Partida finalizada! :D', 'Fechar', {
             horizontalPosition: 'start',

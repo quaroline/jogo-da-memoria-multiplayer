@@ -3,7 +3,9 @@
         <app-modo-administrador *ngIf="clickMenuAdministrativo; else layout"></app-modo-administrador>
         <ng-template #layout>
             <app-menu-inicial (dificuldade)="receberDificuldade($event)" *ngIf="!dificuldadeSelecionada"></app-menu-inicial>
-            <app-jogo [dificuldadeSelecionada]="dificuldadeSelecionada" *ngIf="iniciarJogo"></app-jogo>
+            <div class="justify-content-md-center" *ngIf="iniciarJogo">
+                <app-jogo [dificuldadeSelecionada]="dificuldadeSelecionada"></app-jogo>
+            </div>
         </ng-template>
     </div>
 </div>
