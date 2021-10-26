@@ -76,11 +76,9 @@ export class MenuInicialComponent implements OnInit {
     this.service.entrarEmPartidaExistente(this.partidaExistenteId).subscribe((partida) => {
       this.partida = partida;
 
-      this.dificuldadeSelecionada = this.dificuldadeSelecionada[
+      this.dificuldadeSelecionada = this.partida.id[
         this.dificuldadeSelecionada.length - 1
       ];
-
-      console.log(this.dificuldadeSelecionada)
 
       this.dificuldade.emit(this.dificuldadeSelecionada);
     })
