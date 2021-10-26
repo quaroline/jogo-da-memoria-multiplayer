@@ -9,3 +9,12 @@
 .snackbar-erro {
     background-color: #c62828;
 }
+
+.container-flex {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}

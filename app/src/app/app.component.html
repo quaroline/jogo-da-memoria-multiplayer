@@ -1,11 +1,9 @@
 <div class="row">
-    <div class="col-md-12">
+    <div [class]="iniciarJogo ? '' : 'col-md-12'">
         <app-modo-administrador *ngIf="clickMenuAdministrativo; else layout"></app-modo-administrador>
         <ng-template #layout>
             <app-menu-inicial (dificuldade)="receberDificuldade($event)" *ngIf="!dificuldadeSelecionada"></app-menu-inicial>
-            <div class="justify-content-md-center" *ngIf="iniciarJogo">
-                <app-jogo [dificuldadeSelecionada]="dificuldadeSelecionada"></app-jogo>
-            </div>
+            <app-jogo [dificuldadeSelecionada]="dificuldadeSelecionada" *ngIf="iniciarJogo"></app-jogo>
         </ng-template>
     </div>
 </div>
